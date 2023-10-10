@@ -8,12 +8,12 @@ package ui;
  *
  * @author Farid
  */
-public class FormPanel extends javax.swing.JPanel {
+public class ViewPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form FormPanel
      */
-    public FormPanel() {
+    public ViewPanel() {
         initComponents();
     }
 
@@ -42,9 +42,7 @@ public class FormPanel extends javax.swing.JPanel {
         preferNotToSayRadio = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        submitButton = new javax.swing.JButton();
         photoLabel = new javax.swing.JLabel();
-        uploadButton = new javax.swing.JButton();
         messageLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -52,7 +50,7 @@ public class FormPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 204, 0));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        titleLabel.setText("Patient Registration Form");
+        titleLabel.setText("View Panel");
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         nameLabel.setText("First Name: ");
@@ -84,22 +82,8 @@ public class FormPanel extends javax.swing.JPanel {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUSTOMER", "GUEST" }));
         jComboBox1.setSelectedIndex(-1);
 
-        submitButton.setText("SUBMIT");
-        submitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitButtonActionPerformed(evt);
-            }
-        });
-
         photoLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         photoLabel.setText("Photo: ");
-
-        uploadButton.setText("Upload");
-        uploadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadButtonActionPerformed(evt);
-            }
-        });
 
         messageLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         messageLabel.setText("Message: ");
@@ -115,9 +99,6 @@ public class FormPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(titleLabel))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nameLabel)
@@ -126,29 +107,31 @@ public class FormPanel extends javax.swing.JPanel {
                             .addComponent(messageLabel))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(firstNmaeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                                         .addComponent(ageTextField)
                                         .addComponent(maleRadio))
-                                    .addGap(82, 82, 82)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addComponent(emailLabel)
-                                        .addComponent(jLabel2)
-                                        .addComponent(photoLabel)))
-                                .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(femaleRadio)
-                            .addComponent(preferNotToSayRadio))
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lastNameTextField)
-                                .addComponent(emailTextField)
-                                .addComponent(jComboBox1, 0, 123, Short.MAX_VALUE))
-                            .addComponent(uploadButton))))
+                                    .addComponent(preferNotToSayRadio)
+                                    .addComponent(femaleRadio))
+                                .addGap(82, 82, 82)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(emailLabel)
+                                            .addComponent(jLabel2))
+                                        .addGap(19, 19, 19)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lastNameTextField)
+                                            .addComponent(emailTextField)
+                                            .addComponent(jComboBox1, 0, 123, Short.MAX_VALUE)))
+                                    .addComponent(photoLabel)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(titleLabel)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -174,33 +157,22 @@ public class FormPanel extends javax.swing.JPanel {
                     .addComponent(maleRadio)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(femaleRadio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(preferNotToSayRadio)
-                    .addComponent(photoLabel)
-                    .addComponent(uploadButton))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(messageLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitButton)
-                        .addGap(20, 20, 20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(femaleRadio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(preferNotToSayRadio))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(69, Short.MAX_VALUE))))
+                        .addGap(23, 23, 23)
+                        .addComponent(photoLabel)))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(messageLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 78, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_submitButtonActionPerformed
-
-    private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_uploadButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,8 +195,6 @@ public class FormPanel extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel photoLabel;
     private javax.swing.JRadioButton preferNotToSayRadio;
-    private javax.swing.JButton submitButton;
     private javax.swing.JLabel titleLabel;
-    private javax.swing.JButton uploadButton;
     // End of variables declaration//GEN-END:variables
 }
