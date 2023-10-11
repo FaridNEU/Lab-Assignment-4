@@ -4,6 +4,18 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import static java.awt.Color.black;
+import static java.awt.Color.red;
+import java.awt.HeadlessException;
+import java.awt.Image;
+import static java.awt.image.ImageObserver.HEIGHT;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import model.User;
+
 /**
  *
  * @author Farid
@@ -13,8 +25,11 @@ public class FormPanel extends javax.swing.JPanel {
     /**
      * Creates new form FormPanel
      */
-    public FormPanel() {
+    User user = new User();
+    private JPanel bottomPanel;
+    public FormPanel(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -26,10 +41,10 @@ public class FormPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        genderButtonGroup = new javax.swing.ButtonGroup();
+        genderGroup = new javax.swing.ButtonGroup();
         titleLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
-        firstNmaeTextField = new javax.swing.JTextField();
+        firstNameTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lastNameTextField = new javax.swing.JTextField();
         ageLabel = new javax.swing.JLabel();
@@ -47,15 +62,22 @@ public class FormPanel extends javax.swing.JPanel {
         uploadButton = new javax.swing.JButton();
         messageLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        messageTextArea = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 204, 0));
+        setEnabled(false);
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         titleLabel.setText("Patient Registration Form");
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         nameLabel.setText("First Name: ");
+
+        firstNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                firstNameTextFieldKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Last Name: ");
@@ -69,20 +91,37 @@ public class FormPanel extends javax.swing.JPanel {
         genderLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         genderLabel.setText("Gender: ");
 
-        genderButtonGroup.add(maleRadio);
+        genderGroup.add(maleRadio);
         maleRadio.setText("Male");
+        maleRadio.setActionCommand("Male User");
+        maleRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maleRadioActionPerformed(evt);
+            }
+        });
 
-        genderButtonGroup.add(femaleRadio);
+        genderGroup.add(femaleRadio);
         femaleRadio.setText("Female");
+        femaleRadio.setActionCommand("Female User");
+        femaleRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                femaleRadioActionPerformed(evt);
+            }
+        });
 
-        genderButtonGroup.add(preferNotToSayRadio);
+        genderGroup.add(preferNotToSayRadio);
         preferNotToSayRadio.setText("Prefer Not to Say");
+        preferNotToSayRadio.setActionCommand("Prefer Not to Say User");
+        preferNotToSayRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                preferNotToSayRadioActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Patient Type: ");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CUSTOMER", "GUEST" }));
-        jComboBox1.setSelectedIndex(-1);
 
         submitButton.setText("SUBMIT");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,9 +143,9 @@ public class FormPanel extends javax.swing.JPanel {
         messageLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         messageLabel.setText("Message: ");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        messageTextArea.setColumns(20);
+        messageTextArea.setRows(5);
+        jScrollPane1.setViewportView(messageTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -129,7 +168,7 @@ public class FormPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(firstNmaeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                        .addComponent(firstNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                                         .addComponent(ageTextField)
                                         .addComponent(maleRadio))
                                     .addGap(82, 82, 82)
@@ -159,7 +198,7 @@ public class FormPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
-                    .addComponent(firstNmaeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -196,11 +235,127 @@ public class FormPanel extends javax.swing.JPanel {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+        
+        user.setFirstName(firstNameTextField.getText());
+        user.setLastName(lastNameTextField.getText());
+        user.setAge(ageTextField.getText());
+        user.setEmail(emailTextField.getText());
+        user.setMessage(messageTextArea.getText());
+        user.setType(jComboBox1.getSelectedItem().toString());
+        //gender , type
+        try{
+            String gender = genderGroup.getSelection().getActionCommand();
+            user.setGender(gender);
+        }
+        catch(Exception e){  
+            user.setGender("");
+        }
+        
+        //Check Validation:
+        String output = "";
+        boolean flag = false;
+        if(!isValidName(user.getFirstName())){
+            output = output + "FirstName" ;
+            flag = true;
+        }
+        if(!isValidName(user.getLastName())){
+            output = output + "," + "LastName" ;
+            flag = true;
+        }
+        if(!isValidAge(user.getAge())){
+            output = output + "," + "Age" ;
+            flag = true;
+        }
+        if(!isValidEmail(user.getEmail())){
+            output = output + "," + "Email" ;
+            flag = true;
+        }
+        if(isValidMessage(user.getMessage())){
+            output = output + "," + "Message" ;
+            flag = true;
+        }
+        if(user.getSelectedFile() == null){
+            output = output + "," + "Image" ;
+            flag = true;   
+        }
+        //gender and type
+        if(user.getGender()== null || user.getGender().isEmpty()){
+            output = output + "," + "Gender" ;
+            flag = true;  
+        }
+        if(user.getType() == null || user.getType().isEmpty()){
+            output = output + "," + "Patient Type" ;
+            flag = true;  
+        }
+        
+        //Pop_Up for Invalid or Submition:
+        if(flag == true){
+            String outputMessage = output + " Invalid/empty ... \nPlease check and submit again!!";
+            JOptionPane.showMessageDialog(this, outputMessage, "Invalid Input", HEIGHT);
+        }
+        else{
+            try{
+                ImageIcon imageIcon = new ImageIcon(user.getSelectedFile().getAbsolutePath());
+                Image scaledImage = imageIcon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+                
+                String outputMessage = "User: "+user.getFirstName() + " " + user.getLastName() + "\nregister form submitted.";
+                JOptionPane.showMessageDialog(this, outputMessage, "Confirm of Registeration", HEIGHT, scaledImageIcon);
+                user.setImg(scaledImageIcon);
+                //give them on view if true
+                ViewPanel viewPanel = new ViewPanel(user);
+                bottomPanel.add(viewPanel);
+                CardLayout layout = (CardLayout)bottomPanel.getLayout();
+                layout.next(bottomPanel);
+            }
+            catch(HeadlessException e){
+                JOptionPane.showMessageDialog(this, "Wrong Image File!", "Invalid Input", HEIGHT);
+            }
+
+        }
+        
+
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    
+    //UPLOAD Button for Upload Image and Validation of Image:
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            user.setSelectedFile(fileChooser.getSelectedFile());
+                    // Handle the selected file here, e.g., display it in an image component
+                    // You can also save the file path to use it later.
+            System.out.println("Selected file: " + user.getSelectedFile().getAbsolutePath());
+        }
     }//GEN-LAST:event_uploadButtonActionPerformed
+
+    private void maleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maleRadioActionPerformed
+
+    private void preferNotToSayRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferNotToSayRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_preferNotToSayRadioActionPerformed
+
+    private void femaleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_femaleRadioActionPerformed
+
+    private void firstNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameTextFieldKeyPressed
+//        for (char c : firstNameTextField.getText().toCharArray()) {
+//            if (!Character.isLetter(c)) {
+//                firstNameTextField.setForeground(red);
+//            }
+//        }
+//        if (firstNameTextField.getText().length() >= 2 && firstNameTextField.getText().length() <= 50){
+//            firstNameTextField.setForeground(black);
+//        }
+//        else{
+//            firstNameTextField.setForeground(red);
+//        }
+    }//GEN-LAST:event_firstNameTextFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -209,17 +364,17 @@ public class FormPanel extends javax.swing.JPanel {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JRadioButton femaleRadio;
-    private javax.swing.JTextField firstNmaeTextField;
-    private javax.swing.ButtonGroup genderButtonGroup;
+    private javax.swing.JTextField firstNameTextField;
+    private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JRadioButton maleRadio;
     private javax.swing.JLabel messageLabel;
+    private javax.swing.JTextArea messageTextArea;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel photoLabel;
     private javax.swing.JRadioButton preferNotToSayRadio;
@@ -227,4 +382,51 @@ public class FormPanel extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton uploadButton;
     // End of variables declaration//GEN-END:variables
+    
+    //validation:
+    public boolean isValidName(String name) {
+        if (name == null || name.isEmpty()) {
+            return false;
+        }
+
+        for (char c : name.toCharArray()) {
+            if (!Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return name.length() >= 2 && name.length() <= 50;
+    }
+
+    public boolean isValidEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return false; 
+        }
+        String[] parts = email.split("@");
+        if (parts.length != 2) {
+            return false;
+        }
+        String localPart = parts[0];
+        String domainPart = parts[1];
+        if (localPart.isEmpty()) {
+            return false; 
+        }
+        if (domainPart.isEmpty()) {
+            return false; 
+        }
+        return true;
+    }
+    public boolean isValidAge(String ageStr) {
+        try {
+            int age = Integer.parseInt(ageStr);
+            return age >= 0;
+        } catch (NumberFormatException e) {
+            return false; 
+        }
+    }
+    public boolean isValidMessage(String message){
+        if (message.isEmpty()) {
+            return true; 
+        } 
+        return false;
+    }
 }

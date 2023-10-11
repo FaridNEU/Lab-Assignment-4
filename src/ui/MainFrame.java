@@ -5,6 +5,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import model.User;
 
 
 /**
@@ -96,7 +97,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void formButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formButtonActionPerformed
         // TODO add your handling code here:
-        FormPanel registerPanel = new FormPanel();
+        FormPanel registerPanel = new FormPanel(bottomPanel);
         bottomPanel.add(registerPanel);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -107,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
-        ViewPanel viewPanel = new ViewPanel();
+        ViewPanel viewPanel = new ViewPanel(new User());
         bottomPanel.add(viewPanel);
         CardLayout layout = (CardLayout)bottomPanel.getLayout();
         layout.next(bottomPanel);

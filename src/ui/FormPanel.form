@@ -2,13 +2,14 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="genderButtonGroup">
+    <Component class="javax.swing.ButtonGroup" name="genderGroup">
     </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="0" green="cc" red="ff" type="rgb"/>
     </Property>
+    <Property name="enabled" type="boolean" value="false"/>
   </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -44,7 +45,7 @@
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="firstNmaeTextField" pref="123" max="32767" attributes="0"/>
+                                      <Component id="firstNameTextField" pref="123" max="32767" attributes="0"/>
                                       <Component id="ageTextField" max="32767" attributes="0"/>
                                       <Component id="maleRadio" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -85,7 +86,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="firstNmaeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="firstNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -145,7 +146,10 @@
         <Property name="text" type="java.lang.String" value="First Name: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="firstNmaeTextField">
+    <Component class="javax.swing.JTextField" name="firstNameTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="firstNameTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -188,26 +192,38 @@
     <Component class="javax.swing.JRadioButton" name="maleRadio">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="genderButtonGroup"/>
+          <ComponentRef name="genderGroup"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Male"/>
+        <Property name="actionCommand" type="java.lang.String" value="Male User"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maleRadioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="femaleRadio">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="genderButtonGroup"/>
+          <ComponentRef name="genderGroup"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Female"/>
+        <Property name="actionCommand" type="java.lang.String" value="Female User"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="femaleRadioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="preferNotToSayRadio">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="genderButtonGroup"/>
+          <ComponentRef name="genderGroup"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Prefer Not to Say"/>
+        <Property name="actionCommand" type="java.lang.String" value="Prefer Not to Say User"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="preferNotToSayRadioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -225,7 +241,6 @@
             <StringItem index="1" value="GUEST"/>
           </StringArray>
         </Property>
-        <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -270,7 +285,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="messageTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
